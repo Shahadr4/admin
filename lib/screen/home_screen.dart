@@ -1,12 +1,14 @@
 
 
 import 'package:ev_admin/provider/catogory_provider.dart';
+import 'package:ev_admin/provider/oder_provider.dart';
 import 'package:ev_admin/provider/product_provider.dart';
 import 'package:ev_admin/provider/user_provider.dart';
 import 'package:ev_admin/screen/categoryList.dart';
 import 'package:ev_admin/screen/productAdding.dart';
 import 'package:ev_admin/screen/add_category.dart';
 import 'package:ev_admin/screen/product_list.dart';
+import 'package:ev_admin/screen/product_sold.dart';
 import 'package:ev_admin/screen/users_list.dart';
 import 'package:ev_admin/services/category_service.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -74,6 +76,7 @@ class _AdminState extends State<Admin> {
     final categoryProvider = Provider.of<CategoryProvider>(context);
     final productProvider = Provider.of<ProductProvider>(context);
     final userProvider = Provider.of<UserProvider>(context);
+     final orderProvider = Provider.of<OrdersProvider>(context);
       
      
  
@@ -91,9 +94,9 @@ class _AdminState extends State<Admin> {
                 icon: const Icon(
                   Icons.attach_money,
                   size: 30.0,
-                  color: Colors.green,
+                  color: Colors.green, 
                 ),
-                label: const Text('12,000',
+                label:  Text('${orderProvider.totalrevenue.toString()}',
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 30.0, color: Colors.green)),
               ),
@@ -171,17 +174,22 @@ class _AdminState extends State<Admin> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(22.0),
-                    child: Card(
-                      child: ListTile(
-                          title: TextButton.icon(
-                              onPressed: null,
-                              icon: Icon(Icons.tag_faces),
-                              label: Text("Sold")),
-                          subtitle: Text(
-                            '13',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: active, fontSize: 60.0),
-                          )),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductSoldList(),)); 
+                      },
+                      child: Card(
+                        child: ListTile(
+                            title: TextButton.icon(
+                                onPressed: null,
+                                icon: Icon(Icons.tag_faces),
+                                label: Text("Sold")),
+                            subtitle: Text(
+                               '${orderProvider.orders.length }', 
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: active, fontSize: 60.0),
+                            )),
+                      ),
                     ),
                   ),
                  
