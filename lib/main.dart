@@ -1,5 +1,6 @@
 
 import 'package:ev_admin/provider/catogory_provider.dart';
+import 'package:ev_admin/provider/oder_provider.dart';
 import 'package:ev_admin/provider/product_provider.dart';
 import 'package:ev_admin/provider/user_provider.dart';
 import 'package:ev_admin/screen/splash_screen.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
 ChangeNotifierProvider.value(value: CategoryProvider.initialize()) ,
 ChangeNotifierProvider.value(value: ProductProvider.initialize()) ,
 ChangeNotifierProvider.value(value: UserProvider.initialize()) ,
+ChangeNotifierProvider.value(value: OrdersProvider.initialize()) 
     ],
     child:  MaterialApp(
       title: 'Flutter Demo', 
